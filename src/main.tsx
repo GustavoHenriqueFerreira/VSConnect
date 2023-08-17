@@ -19,7 +19,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <Router>
       <Header />
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/VSConnect' element={<Home />} />
         <Route path='/lista/servicos' element={<ListaServicos />} />
         <Route path='/cadastro/usuario' element={<Cadastro />} />
         <Route path='/cadastro/servicos' element={<CadastroServico />} />
