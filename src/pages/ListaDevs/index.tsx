@@ -31,7 +31,6 @@ function ListaDevs() {
     function listarDesenvolvedores() {
         api.get("users")
         .then(response => {
-            console.log(response.data);
             setDevs(response.data)
         })
         .catch(error => {
@@ -67,6 +66,7 @@ function ListaDevs() {
                                     nome={dev.nome}
                                     email={dev.email}
                                     techs={dev.hardSkills}
+                                    id={dev.id}
                                 />
                             ))}
                         </div>

@@ -31,7 +31,6 @@ function ListaServicos() {
     function listarServicos() {
         api.get("servicos")
         .then(response => {
-            console.log(response.data);
             setServicos(response.data)
         })
         .catch(error => {
@@ -68,6 +67,7 @@ function ListaServicos() {
                                         proposta={servico.valor}
                                         descricao={servico.descricao}
                                         techs={servico.techs}
+                                        id={servico.id}
                                     />
                                 ))}
                             </ul>

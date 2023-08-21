@@ -13,18 +13,22 @@ import CadastroServico from './pages/CadastroServico/index.tsx';
 import ListaDevs from './pages/ListaDevs/index.tsx';
 import Login from './pages/Login/index.tsx';
 import './index.css';
+import PerfilUsuario from './pages/PerfilUsuario/index.tsx';
+import VisualizarServico from './pages/VisualizarServico/index.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Router>
       <Header />
       <Routes>
-        <Route path='/VSConnect' element={<Home />} />
-        <Route path='/VSConnect/lista/servicos' element={<ListaServicos />} />
-        <Route path='/VSConnect/cadastro/usuario' element={<Cadastro />} />
-        <Route path='/VSConnect/cadastro/servicos' element={<CadastroServico />} />
-        <Route path='/VSConnect/lista/devs' element={<ListaDevs />} />
-        <Route path='/VSConnect/login' element={<Login />} />
+        <Route path='/' element={<Home />} />
+        <Route path='/lista/servicos' element={<ListaServicos />} />
+        <Route path='/cadastro/usuario' element={<Cadastro />} />
+        <Route path='/cadastro/servicos' element={<CadastroServico />} />
+        <Route path='/lista/devs' element={<ListaDevs />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/perfil/:idUsuario' element={<PerfilUsuario />} />
+        <Route path='/servico/:idServico' element={<VisualizarServico />} />
       </Routes>
     </Router>
   </React.StrictMode>,

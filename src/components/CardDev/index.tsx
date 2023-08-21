@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./style.css";
 
 function CardDev(props: any) {
@@ -6,10 +7,10 @@ function CardDev(props: any) {
             <li>
                 <div className="dev">
                     <div className="grupo_contato">
-                        <img src={props.foto} alt="" />
+                        <Link to={"/perfil/" + props.id} style={{ textDecoration: 'none', color: 'white' }}> <img src={props.foto} alt="" /></Link>
                         <div className="contato_dev">
-                            <h3>{props.nome}</h3>
-                            <p>{props.email}</p>
+                            <Link to={"/perfil/" + props.id} style={{ textDecoration: 'none', color: 'white' }}><h3>{props.nome}</h3></Link>
+                            <Link to={"/perfil/" + props.id} style={{ textDecoration: 'none', color: 'white' }}><p>{props.email}</p></Link>
                         </div>
                     </div>
                     <div className="techs">
