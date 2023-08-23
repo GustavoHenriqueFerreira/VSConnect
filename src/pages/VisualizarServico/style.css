@@ -57,10 +57,9 @@
 }
 
 #main_visualizarservico .servico .techs {
-    max-width: 70%;
+    width: 180px;
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
 }
 
 #main_visualizarservico .servico .techs span {

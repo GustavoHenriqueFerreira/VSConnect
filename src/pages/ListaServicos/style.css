@@ -333,10 +333,9 @@ hr {
 }
 
 .techs {
-    max-width: 70%;
+    width: 180px;
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
 }
 
 .techs span {
