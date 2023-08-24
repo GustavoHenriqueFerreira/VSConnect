@@ -64,7 +64,7 @@ function ListaServicos() {
                                     <CardServico
                                         key={index}
                                         titulo={servico.nome}
-                                        proposta={servico.valor}
+                                        valor={servico.valor}
                                         descricao={servico.descricao}
                                         techs={servico.techs}
                                         id={servico.id}

@@ -25,12 +25,51 @@ function CadastroUsuario() {
     const [email, setEmail] = useState<string>("");
     const [senha, setSenha] = useState<string>("");
     const [cep, setCep] = useState<string>("");
-    const [foto, setFoto] = useState<any>();
+    const [foto, setFoto] = useState<any>(); //valor inicial undefined
     const [logradouro, setLogradouro] = useState<string>("");
     const [numero, setNumero] = useState<string>("");
     const [bairro, setBairro] = useState<string>("");
     const [cidade, setCidade] = useState<string>("");
     const [uf, setUf] = useState<string>("");
+
+
+    function cadastrarUsuario(event: any) {
+        event.preventDefault();
+
+        //só utiliza formData quando tiver arquivos 
+        const formData = new FormData();
+
+
+        //A chave da função do append() precisa ser o mesmo nome do atributo que api retorna
+        formData.append("nome", nome);
+        formData.append("email", email);
+        formData.append("password", senha);
+        formData.append("user_img", foto);
+        formData.append("cep", cep);
+        formData.append("logradouro", logradouro);
+        formData.append("numero", numero);
+        formData.append("bairro", bairro);
+        formData.append("cidade", cidade);
+        formData.append("uf", uf);
+        formData.append("hardSkills", JSON.stringify(skillsSelecionadas));
+
+        api.post("users", formData)
+            .then((response: any) => {
+                console.log(response);
+                alert("Usuário cadastrado com sucesso!😊🤗");
+            })
+            .catch((error: any) => {
+                console.log(error);
+                alert("Falha ao cadastrar um novo usuário");
+            })
+
+    }
+
+    function verificarCampoUpload(event: any) {
+        console.log(event.target.files[0]);
+        //atualiza o state foto com o valor do file
+        setFoto(event.target.files[0]);
+    }
 
     //Funçao para colocar mascara no input de CEP
     function mascaraCep(event: any) {
@@ -77,236 +116,199 @@ function CadastroUsuario() {
         setSkillsSelecionadas(novaListaSkillsSelecionadas);
     };
 
-    function verificarCampoUpload(event: any) {
-        setFoto(event.target.files[0])
-        console.log(event.target.files[0])
-    }
-
-    function cadastrarUsuario(event: any) {
-        event.preventDefault();
-
-        const form_data = new FormData()
-        form_data.append('nome', nome)
-        form_data.append('email', email)
-        form_data.append('password', senha)
-        form_data.append('cep', cep)
-        form_data.append("user_img", foto)
-        form_data.append('logradouro', logradouro)
-        form_data.append('numero', numero)
-        form_data.append('bairro', bairro)
-        form_data.append('cidade', cidade)
-        form_data.append('uf', uf)
-        form_data.append('hardSkills', JSON.stringify(skillsSelecionadas))
-
-        console.log(foto)
-
-        api.post("users/", form_data)
-            .then(response => {
-                console.log(response)
-                alert("Usuário cadastrado!")
-            })
-            .catch(error => {
-                console.log(error);
-                alert("Usuário não foi cadastrado!")
-            })
-    }
-
 
     return (
-        <>
-            <main className="main_cadastro">
-                <div className="container container_cad">
-                    <div className="cad_conteudo">
-                        <h1>Cadastro</h1>
+        <main className="main_cadastro">
+            <div className="container container_cad">
+                <div className="cad_conteudo">
+                    <h1>Cadastro</h1>
+                    <hr />
+                    <form className="cad_formulario" method="POST" onSubmit={cadastrarUsuario}>
+                        <div className="cad_box_input">
+                            <label htmlFor="nome">Nome Completo:</label>
+                            <input
+                                type="text"
+                                id="nome"
+                                placeholder="Digite aqui seu nome:"
+                                onChange={(e) => setNome(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="cad_box_input">
+                            <label htmlFor="email">E-mail:</label>
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="Digite aqui seu e-mail:"
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="cad_box_input">
+                            <label htmlFor="senha">Senha:</label>
+                            <input
+                                type="password"
+                                id="senha"
+                                placeholder="Digite aqui sua senha:"
+                                onChange={(e) => setSenha(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="cad_box_input">
+                            <label htmlFor="foto">Foto:</label>
+                            {/* Passar primeiro como exemplo */}
+                            <input
+                                type="file"
+                                id="foto"
+                                onChange={verificarCampoUpload}
+                                required
+                            />
+                        </div>
+
+                        <span>Endereço:</span>
                         <hr />
-                        <form className="cad_formulario" method="POST" onSubmit={(event) => cadastrarUsuario(event)}>
-                            <div className="cad_box_input">
-                                <label htmlFor="nome">Nome Completo:</label>
+
+                        <div className="cad_box_input">
+                            <label htmlFor="cep">Cep:</label>
+                            <input
+                                type="text"
+                                id="cep"
+                                maxLength={9}
+                                onKeyUp={mascaraCep}
+                                placeholder="Digite aqui seu Cep:"
+                                onChange={(e) => setCep(e.target.value)}
+                                required
+                            />
+                        </div>
+
+                        <div className="cad_box_input">
+                            <label htmlFor="logradouro">Logradouro:</label>
+                            <input
+                                type="text"
+                                id="logradouro"
+                                placeholder="Digite aqui seu Logradouro:"
+                                onChange={(e) => setLogradouro(e.target.value)}
+                                required
+                            />
+                        </div>
+
+                        <div className="cad_linha1_input">
+                            <div className="cad_box_input2">
+                                <label htmlFor="numero">Numero:</label>
                                 <input
                                     type="text"
-                                    id="nome"
-                                    placeholder="Digite aqui seu nome:"
+                                    id="numero"
+                                    placeholder="Digite o Nº:"
+                                    onChange={(e) => setNumero(e.target.value)}
                                     required
-                                    onChange={(event) => setNome(event.target.value)}
-                                />
-                            </div>
-                            <div className="cad_box_input">
-                                <label htmlFor="email">E-mail:</label>
-                                <input
-                                    type="email"
-                                    id="email"
-                                    placeholder="Digite aqui seu e-mail:"
-                                    required
-                                    onChange={(event) => setEmail(event.target.value)}
-                                />
-                            </div>
-                            <div className="cad_box_input">
-                                <label htmlFor="senha">Senha:</label>
-                                <input
-                                    type="password"
-                                    id="senha"
-                                    placeholder="Digite aqui sua senha:"
-                                    required
-                                    onChange={(event) => setSenha(event.target.value)}
-                                />
-                            </div>
-                            <div className="cad_box_input">
-                                <label htmlFor="foto">Foto:</label>
-                                {/* Passar primeiro como exemplo */}
-                                <input
-                                    type="file"
-                                    id="foto"
-                                    required
-                                    onChange={(event) => verificarCampoUpload(event)}
                                 />
                             </div>
 
-                            <span>Endereço:</span>
-                            <hr />
-
-                            <div className="cad_box_input">
-                                <label htmlFor="cep">Cep:</label>
+                            <div className="cad_box_input2">
+                                <label htmlFor="bairro">Bairro:</label>
                                 <input
                                     type="text"
-                                    id="cep"
-                                    maxLength={9}
-                                    onKeyUp={mascaraCep}
-                                    placeholder="Digite aqui seu Cep:"
+                                    id="bairro"
+                                    placeholder="Digite aqui seu Bairro:"
+                                    onChange={(e) => setBairro(e.target.value)}
                                     required
-                                    onChange={(event) => setCep(event.target.value)}
                                 />
                             </div>
+                        </div>
 
-                            <div className="cad_box_input">
-                                <label htmlFor="logradouro">Logradouro:</label>
+                        <div className="cad_linha2_input">
+                            <div className="cad_box_input2">
+                                <label htmlFor="cidade">Cidade:</label>
                                 <input
                                     type="text"
-                                    id="logradouro"
-                                    placeholder="Digite aqui seu Logradouro:"
+                                    id="cidade"
+                                    placeholder="Digite aqui sua Cidade:"
+                                    onChange={(e) => setCidade(e.target.value)}
                                     required
-                                    onChange={(event) => setLogradouro(event.target.value)}
                                 />
                             </div>
 
-                            <div className="cad_linha1_input">
-                                <div className="cad_box_input2">
-                                    <label htmlFor="numero">Numero:</label>
-                                    <input
-                                        type="text"
-                                        id="numero"
-                                        placeholder="Digite o Nº:"
-                                        required
-                                        onChange={(event) => setNumero(event.target.value)}
-                                    />
-                                </div>
-
-                                <div className="cad_box_input2">
-                                    <label htmlFor="bairro">Bairro:</label>
-                                    <input
-                                        type="text"
-                                        id="bairro"
-                                        placeholder="Digite aqui seu Bairro:"
-                                        required
-                                        onChange={(event) => setBairro(event.target.value)}
-                                    />
-                                </div>
+                            <div className="cad_box_input2">
+                                <label className="cad_uf" htmlFor="uf">UF:</label>
+                                <input
+                                    type="text"
+                                    id="uf"
+                                    maxLength={2}
+                                    placeholder="Digite a UF:"
+                                    onChange={(e) => setUf(e.target.value)}
+                                    required
+                                />
                             </div>
+                        </div>
 
-                            <div className="cad_linha2_input">
-                                <div className="cad_box_input2">
-                                    <label htmlFor="cidade">Cidade:</label>
-                                    <input
-                                        type="text"
-                                        id="cidade"
-                                        placeholder="Digite aqui sua Cidade:"
-                                        required
-                                        onChange={(event) => setCidade(event.target.value)}
-                                    />
-                                </div>
-
-                                <div className="cad_box_input2">
-                                    <label className="cad_uf" htmlFor="uf">UF:</label>
-                                    <input
-                                        type="text"
-                                        id="uf"
-                                        maxLength={2}
-                                        placeholder="Digite a UF:"
-                                        required
-                                        onChange={(event) => setUf(event.target.value)}
-                                    />
-                                </div>
-                            </div>
-
-                            <div className="cad_linha_checkbox">
-                                <span>Cliente</span>
-                                <div className="cad_container_checkbox">
-                                    <input
-                                        className="cad_checkbox"
-                                        type="checkbox"
-                                        name="checkbox"
-                                        id="checkbox"
-                                    />
-                                    <label className="cad_label" htmlFor="checkbox"></label>
-                                    <div className="cad_box_checkbox"></div>
-                                    <div className="cad_hard_skill">
-                                        <span>Hard Skills</span>
-                                        <hr />
-                                        <div className="cad_box_skills">
-                                            <span>Selecione uma Skill para adicionar</span>
-                                            <div className="cad_linha_select">
-                                                <select
-                                                    name=""
-                                                    id="cad_select_skill"
-                                                    onChange={(e) => setSelect(e.target.value)}
-                                                >
-                                                    <option selected disabled value="">Selecione</option>
-                                                    {
-                                                        techs.map((tech: any, index: number) => {
-                                                            return <option key={index} value={tech}>{tech}</option>
-                                                        })
-                                                    }
-                                                </select>
-                                                <button
-                                                    type="button"
-                                                    id="cad_btn_inserir"
-                                                    onClick={adicionarSkill}>
-                                                    Inserir
-                                                </button>
-                                            </div>
-                                            <div id="cad_lista_skills">
+                        <div className="cad_linha_checkbox">
+                            <span>Cliente</span>
+                            <div className="cad_container_checkbox">
+                                <input
+                                    className="cad_checkbox"
+                                    type="checkbox"
+                                    name="checkbox"
+                                    id="checkbox"
+                                />
+                                <label className="cad_label" htmlFor="checkbox"></label>
+                                <div className="cad_box_checkbox"></div>
+                                <div className="cad_hard_skill">
+                                    <span>Hard Skills</span>
+                                    <hr />
+                                    <div className="cad_box_skills">
+                                        <span>Selecione uma Skill para adicionar</span>
+                                        <div className="cad_linha_select">
+                                            <select
+                                                name=""
+                                                id="cad_select_skill"
+                                                onChange={(e) => setSelect(e.target.value)}
+                                                defaultValue={select}
+                                            >
+                                                <option disabled value="">Selecione</option>
                                                 {
-                                                    skillsSelecionadas.length > 0 ? skillsSelecionadas.map((el: any, index: number) => {
-                                                        return <div key={index} className="cad_item_skill">
-                                                            <span className="cad_span_skill">{el}</span>
-                                                            <button
-                                                                type="button"
-                                                                id="cad_item_excluir"
-                                                                onClick={() => excluirSkill(el)}
-                                                                className="cad_item_excluir">
-                                                                <svg xmlns="http://www.w3.org/2000/svg"
-                                                                    height="1em"
-                                                                    viewBox="0 0 384 512">
-                                                                    <path
-                                                                        d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
-                                                                </svg>
-                                                            </button>
-                                                        </div>
-                                                    }) : <span className="cad_span_skill">Nenhuma skill cadastrada</span>
+                                                    techs.map((tech: any, index: number) => {
+                                                        return <option key={index} value={tech}>{tech}</option>
+                                                    })
                                                 }
-                                            </div>
+                                            </select>
+                                            <button
+                                                type="button"
+                                                id="cad_btn_inserir"
+                                                onClick={adicionarSkill}>
+                                                Inserir
+                                            </button>
+                                        </div>
+                                        <div id="cad_lista_skills">
+                                            {
+                                                skillsSelecionadas.length > 0 ? skillsSelecionadas.map((el: any, index: number) => {
+                                                    return <div key={index} className="cad_item_skill">
+                                                        <span className="cad_span_skill">{el}</span>
+                                                        <button
+                                                            type="button"
+                                                            id="cad_item_excluir"
+                                                            onClick={() => excluirSkill(el)}
+                                                            className="cad_item_excluir">
+                                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                                height="1em"
+                                                                viewBox="0 0 384 512">
+                                                                <path
+                                                                    d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z" />
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+                                                }) : <span className="cad_span_skill">Nenhuma skill cadastrada</span>
+                                            }
                                         </div>
                                     </div>
                                 </div>
-                                <span>Desenvolvedor</span>
                             </div>
-                            <button type="submit" className="cad_botao">Cadastrar</button>
-                        </form>
-                    </div>
+                            <span>Desenvolvedor</span>
+                        </div>
+                        <button type="submit" className="cad_botao">Cadastrar</button>
+                    </form>
                 </div>
-            </main>
-
-            <Footer />
-        </>
+            </div>
+        </main>
     );
 }
 

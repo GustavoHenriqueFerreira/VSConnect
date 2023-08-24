@@ -44,7 +44,7 @@ function PerfilUsuario() {
                     <h1>Página de Perfil - {infoUsuario.nome}</h1>
 
                     <div className="topo_dev">
-                        <img src={"https://dark-ruby-scallop-robe.cyclic.app/static/" + infoUsuario.foto} alt={"Foto de perfil de " + infoUsuario.nome} />
+                        <img src={"http://localhost:3000//static/" + infoUsuario.foto} alt={"Foto de perfil de " + infoUsuario.nome} />
                         <h2>{infoUsuario.nome}</h2>
                     </div>
 

@@ -62,10 +62,10 @@ function ListaDevs() {
                             {devs.map((dev, index) => (
                                 <CardDev
                                     key={index}
-                                    foto={`https://dark-ruby-scallop-robe.cyclic.app/static/${dev.user_img}`}
+                                    foto={`http://localhost:3000/static/${dev.user_img}`}
                                     nome={dev.nome}
                                     email={dev.email}
-                                    techs={dev.hardSkills}
+                                    listaTechs={dev.hardSkills}
                                     id={dev.id}
                                 />
                             ))}

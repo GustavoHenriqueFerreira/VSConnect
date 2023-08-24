@@ -2,6 +2,14 @@ import { Link } from "react-router-dom";
 import "./style.css";
 
 function CardDev(props: any) {
+    function verificarListaTechs() {
+        if (typeof props.listaTechs === "string") {
+            return JSON.parse(props.listaTechs);
+        } else {
+            return props.listaTechs;
+        }
+    }
+
     return (
         <ul>
             <li>
@@ -14,14 +22,14 @@ function CardDev(props: any) {
                         </div>
                     </div>
                     <div className="techs">
-                        {props.techs.map((tech: string, index: number) => (
+                        {verificarListaTechs().map((tech: string, index: number) => (
                             <span key={index}>{tech}</span>
                         ))}
                     </div>
                 </div>
             </li>
         </ul>
-    )
+    );
 }
 
 export default CardDev;
