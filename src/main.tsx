@@ -22,13 +22,13 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <Header />
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/lista/servicos' element={<ListaServicos />} />
-        <Route path='/cadastro/usuario' element={<CadastroUsuario />} />
-        <Route path='/cadastro/servicos' element={<CadastroServico />} />
-        <Route path='/lista/devs' element={<ListaDevs />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/lista/devs' element={<ListaDevs />} />
         <Route path='/perfil/:idUsuario' element={<PerfilUsuario />} />
+        <Route path='/cadastro/usuario' element={<CadastroUsuario />} />
+        <Route path='/lista/servicos' element={<ListaServicos />} />
         <Route path='/servico/:idServico' element={<VisualizarServico />} />
+        <Route path='/cadastro/servicos' element={<CadastroServico />} />
       </Routes>
     </Router>
   </React.StrictMode>,
