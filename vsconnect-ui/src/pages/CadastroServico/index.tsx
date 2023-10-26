@@ -100,7 +100,7 @@ function CadastroServico() {
                     <div className="cad_serv_conteudo">
                         <h1>Cadastro de Serviço</h1>
                         <hr />
-                        <form className="cad_serv_formulario" onSubmit={cadastrarServico}>
+                        <form className="cad_serv_formulario" method="POST" onSubmit={cadastrarServico}>
                             <div className="cad_serv_box_input">
                                 <label htmlFor="titulo">Titulo do serviço:</label>
                                 <input

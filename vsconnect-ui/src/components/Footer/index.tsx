@@ -16,7 +16,7 @@ function Footer() {
                             <li><Link to={'/login'}>Login</Link></li>
                             <li><Link to={'/'}>Home</Link></li>
                             <li><Link to={'/lista/servicos'}>Listar Serviços</Link></li>
-                            <li><Link to={'/cadastro/servico'}>Cadastrar Serviços</Link></li>
+                            <li><Link to={'/cadastro/servicos'}>Cadastrar Serviços</Link></li>
                             <li><Link to={'/cadastro/usuario'}>Cadastrar Desenvolvedor</Link></li>
                             <li><Link to={'/lista/devs'}>Lista de Devs</Link></li>
                         </ul>
