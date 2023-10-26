@@ -62,7 +62,7 @@ function ListaDevs() {
                             {devs.map((dev, index) => (
                                 <CardDev
                                     key={index}
-                                    foto={`http://localhost:3000/static/${dev.user_img}`}
+                                    foto={`${dev.user_img}`}
                                     nome={dev.nome}
                                     email={dev.email}
                                     listaTechs={dev.hardSkills}

@@ -9,7 +9,7 @@ import { useState } from "react";
 function CadastroUsuario() {
 
     //state techs com as tecnologias definidas
-    const [techs, setTechs] = useState<string[]>(
+    const [techs] = useState<string[]>(
         [
             "HTML",
             "CSS",
@@ -118,6 +118,7 @@ function CadastroUsuario() {
 
 
     return (
+        <>
         <main className="main_cadastro">
             <div className="container container_cad">
                 <div className="cad_conteudo">
@@ -309,10 +310,9 @@ function CadastroUsuario() {
                 </div>
             </div>
         </main>
+        <Footer/>
+        </>
     );
 }
 
 export default CadastroUsuario;
-
-
-
