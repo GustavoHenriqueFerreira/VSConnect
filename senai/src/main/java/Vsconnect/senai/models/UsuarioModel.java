@@ -11,7 +11,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "tb_usuarios")
+@Table(name = "tbusuarios")
 public class UsuarioModel implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
@@ -28,4 +28,6 @@ public class UsuarioModel implements Serializable {
     private String cep;
 
     private String tipo_usuario;
+
+    private String url_img;
 }
